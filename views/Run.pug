@@ -1,0 +1,18 @@
+extends layout
+block content
+    h1= title
+        -let souji =[{Name:"Jesse-Owens ",age:25,rank:2},{Name:"Abebe-Bikila",age:22,rank:4},{Name:"Steve-Prefontaine",age:28,rank:6}]
+    div(class="container-fluid")
+    div(class="row")
+
+        each Run,index in souji
+            table(style='width:100%')
+                tr
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.Name}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.age}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.rank}
+        script.
+            function buy(type)
+            {
+                alert(`Athlet ${type+1}`)
+            }
