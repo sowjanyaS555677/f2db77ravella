@@ -1,18 +1,20 @@
 extends layout
 block content
-    h1= title
-        -let souji =[{Name:"Jesse-Owens ",age:25,rank:2},{Name:"Abebe-Bikila",age:22,rank:4},{Name:"Steve-Prefontaine",age:28,rank:6}]
-    div(class="container-fluid")
-    div(class="row")
+  h1= title
+    - var runs  = results
+  div(class="container-fluid")
+  div(class="row")
 
-        each Run,index in souji
+    each Run,index in runs
             table(style='width:100%')
                 tr
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.Name}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.age}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.rank}
-        script.
-            function buy(type)
-            {
-                alert(`Athlet ${type+1}`)
-            }
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.Run_type}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.size}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{Run.cost}
+
+    script.
+     
+      function buy(line)
+      {
+        alert(`Run details ${line+1}`)
+      }
