@@ -38,22 +38,19 @@ async function recreateDB(){
   // Delete everything 
   await Run.deleteMany(); 
   let instance1 = new 
-Run({Run_type:"A&M",  size:'MEDIUM', 
-cost:2500}); 
+Run({Run_type:"Jesse-Owens",  Run_age:25, Run_rank:2}); 
   instance1.save( function(err,doc) { 
       if(err) return console.error(err); 
       console.log("First object saved") 
   }); 
   let instance2 = new 
-  Run({Run_type:"UMC",  size:'LARGE', 
-  cost:3000}); 
+  Run({Run_type:"Abebe-Bikila",  Run_age:22, Run_rank:4}); 
     instance2.save( function(err,doc) { 
         if(err) return console.error(err); 
         console.log("second object saved") 
     }); 
   let instance3 = new 
-  Run({Run_type:"NWMSU",  size:'MEDIUM', 
-  cost:15000}); 
+  Run({Run_type:"Steve-Prefontaine",  Run_age:28, Run_rank:6}); 
     instance3.save( function(err,doc) { 
         if(err) return console.error(err); 
         console.log("Third object saved") 
