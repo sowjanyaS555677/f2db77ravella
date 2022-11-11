@@ -11,9 +11,16 @@ exports.Run_list = async function (req, res) {
     }
 };
 // for a specific Run.
-exports.Run_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Run detail: ' + req.params.id);
-};
+exports.Run_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Run.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 
 // Handle Run create on POST.
 exports.Run_create_post = async function (req, res) {
     console.log(req.body)
@@ -38,10 +45,26 @@ exports.Run_create_post = async function (req, res) {
 exports.Run_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Run delete DELETE ' + req.params.id);
 };
-// Handle Run update form on PUT.
-exports.Run_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: Run update PUT' + req.params.id);
-};
+// Handle Costume update form on PUT. 
+exports.Run_update_put = async function(req, res) { 
+    console.log(`update on id ${req.params.id} with body 
+${JSON.stringify(req.body)}`) 
+    try { 
+        let toUpdate = await Run.findById( req.params.id) 
+        // Do updates of properties 
+        if(req.body.Run_type)  
+               toUpdate.Run_type = req.body.Run_type; 
+        if(req.body.Run_age) toUpdate.Run_age = req.body.Run_age; 
+        if(req.body.Run_rank) toUpdate.Run_rank = req.body.Run_rank; 
+        let result = await toUpdate.save(); 
+        console.log("Sucess " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": ${err}: Update for id ${req.params.id} 
+failed`); 
+    } 
+}; 
 exports.Run_view_all_Page = async function (req, res) {
     try {
         theRun = await Run.find();

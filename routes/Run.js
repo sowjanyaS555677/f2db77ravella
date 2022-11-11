@@ -1,9 +1,9 @@
 var express = require('express');
+var Run_controller=require('../controllers/Run')
 var router = express.Router();
-var Run_controlers= require('../controllers/Run');
 
-/* GET home page. */
+/* home page */
 
-router.get('/', Run_controlers.Run_view_all_Page ); 
+router.get('/', Run_controller.Run_view_all_Page);
 
 module.exports = router;
