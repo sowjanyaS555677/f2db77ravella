@@ -30,8 +30,8 @@ exports.Run_create_post = async function (req, res) {
     // and require that it be a json object
     // {"costume_type":"goat",  "size":"large", "cost":12}
     document.Run_type = req.body.Run_type;
-    document.size = req.body.size;
-    document.cost = req.body.cost;
+    document.Run_age = req.body.Run_age;
+    document.Run_rank = req.body.Run_rank;
     try {
         let result = await document.save();
         res.send(result);
@@ -41,10 +41,18 @@ exports.Run_create_post = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
-// Handle Run delete form on DELETE.
-exports.Run_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: Run delete DELETE ' + req.params.id);
-};
+// Handle Costume delete on DELETE. 
+exports.Run_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Run.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
 // Handle Costume update form on PUT. 
 exports.Run_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 

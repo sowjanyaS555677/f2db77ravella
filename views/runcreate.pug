@@ -1,0 +1,34 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='RunForm', action="/resource/Run", method="POST") 
+    div.form-group 
+        label.RunAttr(for='Run_type') Run type 
+        input#Run_type(type='text',class="form-control", name='Run_type') 
+    div.form-group 
+        label.RunAttr(for='Run_age') Run size 
+        input#Run_age(type='number',class="form-control", name='Run_age') 
+    div.form-group 
+        label.RunAttr(for='Run_rank') Run cost 
+        input#Run_rank(type='number',class="form-control", name='Run_rank') 
+    input(class="btn btn-success m-2" type="submit") 
+ 
+  script. 
+    document.forms['RunForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

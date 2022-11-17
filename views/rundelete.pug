@@ -1,0 +1,53 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let Runid = toShow._id 
+    - let Run_type = toShow.Run_type 
+    - let Run_age = toShow.Run_age
+    - let Run_set = toShow.Run_set
+    - let actionid = "/resource/Run/" + Runid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='RunAttr mr-3') Run ID is: 
+        div #{Runid} 
+      div.row 
+        div(class='RunAttr mr-3') Run Type is: 
+        div #{Run_type} 
+      div.row 
+        div(class='RunAttr mr-3') Run age is: 
+        div #{Run_age} 
+      div.row 
+        div(class='RunAttr mr-3') Run set is: 
+        div #{Run_set} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the Run collection 
+      window.location.href='/Run' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'       
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/Run' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

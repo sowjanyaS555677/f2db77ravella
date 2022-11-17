@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+  h1= title 
+
+  if (toShow==null) 
+    h2 No instance to Show
+  else
+    - let Runid = toShow._id 
+    - let Runtype = toShow.Run_type 
+    - let Runage = toShow.Run_age 
+    - let Runrank = toShow.Run_rank
+    div 
+      div.row 
+        div(class='RunAttr mr-3') Run ID is: 
+        div #{Runid} 
+      div.row 
+        div(class='RunAttr mr-3') Run Type is: 
+        div #{Runtype} 
+      div.row 
+        div(class='RunAttr mr-3') Run age is: 
+        div #{Runage} 
+      div.row 
+        div(class='RunAttr mr-3') Run rank is: 
+        div #{Runrank} 
